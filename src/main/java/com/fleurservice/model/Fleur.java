@@ -1,5 +1,8 @@
 package com.fleurservice.model;
 
+//filtrage
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -25,7 +28,10 @@ public class Fleur {
 
     private String saisonnalite;
 
+    //filtrage masque le fournisseur
+    @JsonIgnore
     private String fournisseur;
+
 
     public Fleur() {}
 
