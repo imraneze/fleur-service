@@ -25,18 +25,19 @@ public class Fleur {
 
     private String saisonnalite;
 
+    private String fournisseur;
 
     public Fleur() {}
 
 
-    public Fleur(String nom, String couleur, Double prix, String saisonnalite) {
+    public Fleur(Long id, String nom, String couleur, Double prix, String saisonnalite, String fournisseur) {
+        this.id = id;
         this.nom = nom;
         this.couleur = couleur;
         this.prix = prix;
         this.saisonnalite = saisonnalite;
+        this.fournisseur = fournisseur;
     }
-
-
 
     public Long getId() {
         return id;
@@ -82,4 +83,8 @@ public class Fleur {
         this.saisonnalite = saisonnalite;
 
         }
+
+    public String getFournisseur() {return fournisseur;}
+
+    public void setFournisseur(String fournisseur) {this.fournisseur = fournisseur;}
 }

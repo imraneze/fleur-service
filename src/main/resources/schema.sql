@@ -5,5 +5,6 @@ CREATE TABLE fleurs (
     nom         VARCHAR(100) NOT NULL,
     couleur     VARCHAR(50)  NOT NULL,
     prix        DOUBLE       NOT NULL,
-    saisonnalite VARCHAR(50)
+    saisonnalite VARCHAR(50),
+    fournisseur  VARCHAR(100)
 );
