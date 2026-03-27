@@ -1,8 +1,9 @@
-INSERT INTO fleurs (nom, couleur, prix, saisonnalite) VALUES ('Rose', 'Rouge', 3.50, 'Printemps');
-INSERT INTO fleurs (nom, couleur, prix, saisonnalite) VALUES ('Tulipe', 'Jaune', 2.00, 'Printemps');
-INSERT INTO fleurs (nom, couleur, prix, saisonnalite) VALUES ('Lavande', 'Violet', 4.00, 'Été');
-INSERT INTO fleurs (nom, couleur, prix, saisonnalite) VALUES ('Tournesol', 'Jaune', 3.00, 'Été');
-INSERT INTO fleurs (nom, couleur, prix, saisonnalite) VALUES ('Lys', 'Blanc', 5.50, 'Été');
-INSERT INTO fleurs (nom, couleur, prix, saisonnalite) VALUES ('Orchidée', 'Rose', 8.00, 'Toute saison');
-INSERT INTO fleurs (nom, couleur, prix, saisonnalite) VALUES ('Marguerite', 'Blanc', 1.50, 'Printemps');
-INSERT INTO fleurs (nom, couleur, prix, saisonnalite) VALUES ('Pivoine', 'Rose', 6.00, 'Printemps');
+INSERT INTO fleurs (nom, couleur, prix, saisonnalite, fournisseur) VALUES
+('Rose', 'Rouge', 3.50, 'Printemps', 'Fournisseur A'),
+('Tulipe', 'Jaune', 2.00, 'Printemps', 'Fournisseur B'),
+('Lavande', 'Violet', 4.00, 'Été', 'Fournisseur C'),
+('Tournesol', 'Jaune', 3.00, 'Été', 'Fournisseur D'),
+('Lys', 'Blanc', 5.50, 'Été', 'Fournisseur E'),
+('Orchidée', 'Rose', 8.00, 'Toute saison', 'Fournisseur F'),
+('Marguerite', 'Blanc', 1.50, 'Printemps', 'Fournisseur G'),
+('Pivoine', 'Rose', 6.00, 'Printemps', 'Fournisseur H');

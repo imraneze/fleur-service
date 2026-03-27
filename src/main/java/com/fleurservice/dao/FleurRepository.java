@@ -10,4 +10,6 @@ public interface FleurRepository extends JpaRepository<Fleur, Long> {
 
     List<Fleur> findByCouleurIgnoreCase(String couleur);
 
+    List<Fleur> findByPrixLessThanEqual(Double prix);
+
 }

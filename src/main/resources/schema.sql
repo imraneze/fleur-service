@@ -1,10 +1,10 @@
-DROP TABLE IF EXISTS fleur;
+DROP TABLE IF EXISTS fleurs;
 
-CREATE TABLE fleurs (
-    id          BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nom         VARCHAR(100) NOT NULL,
-    couleur     VARCHAR(50)  NOT NULL,
-    prix        DOUBLE       NOT NULL,
+CREATE TABLE IF NOT EXISTS fleurs (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    couleur VARCHAR(50) NOT NULL,
+    prix DOUBLE NOT NULL,
     saisonnalite VARCHAR(50),
-    fournisseur  VARCHAR(100)
-);
+    fournisseur VARCHAR(100)
+    );
