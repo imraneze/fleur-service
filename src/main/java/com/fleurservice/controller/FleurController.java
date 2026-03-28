@@ -88,7 +88,7 @@ public class FleurController {
         List<Fleur> fleurs = fleurRepository.findByCouleurIgnoreCase(couleur);
 
         if (fleurs.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            throw new FleurNotFoundException(couleur);
         }
         return ResponseEntity.ok(fleurs);
     }
@@ -99,9 +99,16 @@ public class FleurController {
         List<Fleur> fleurs = fleurRepository.findByPrixLessThanEqual(maxPrix);
 
         if (fleurs.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            throw new FleurNotFoundException(maxPrix);
         }
         return ResponseEntity.ok(fleurs);
+    }
+
+    @GetMapping("/admin")
+    @JsonView(FleurView.Internal.class)
+    public ResponseEntity<List<Fleur>> getFleurAdmin() {
+        List<Fleur> fleur = fleurRepository.findAll();
+        return ResponseEntity.ok(fleur);
     }
 
     @GetMapping("/admin/{id}")
