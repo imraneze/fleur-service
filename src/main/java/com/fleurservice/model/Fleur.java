@@ -2,39 +2,42 @@ package com.fleurservice.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fleurservice.dto.FleurView;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+@Schema(description = "Entité représentant une fleur dans la boutique")
 @Entity
 @Table(name = "fleurs")
 public class Fleur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(FleurView.Public.class)
+    @Schema(description = "Identifiant unique", example = "1")
     private Long id;
 
     @NotBlank(message = "Le nom est obligatoire")
     @Pattern(regexp = "^[^0-9]*$", message = "Le nom ne doit pas contenir de chiffres")
     @Column(nullable = false)
-    @JsonView(FleurView.Public.class)
+    @Schema(description = "Nom de la fleur, sans chiffres", example = "Rose")
     private String nom;
 
     @NotBlank(message = "La couleur est obligatoire")
-    @JsonView(FleurView.Public.class)
+    @Schema(description = "Couleur de la fleur", example = "Rouge")
     private String couleur;
 
     @NotNull(message = "Le prix est obligatoire")
     @Positive(message = "Le prix doit être positif")
-    @JsonView(FleurView.Public.class)
+    @Schema(description = "Prix de vente en euros", example = "3.50")
     private Double prix;
 
-    @JsonView(FleurView.Public.class)
+    @Schema(description = "Saison de floraison", example = "Printemps")
     private String saisonnalite;
 
     // Visible seulement pour ADMIN
-    @JsonView(FleurView.Internal.class)
+    @Schema(description = "Fournisseur (admin uniquement)", example = "Fournisseur A")
     private String fournisseur;
 
     public Fleur() {}

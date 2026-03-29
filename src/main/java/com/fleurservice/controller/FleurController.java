@@ -5,6 +5,8 @@ import com.fleurservice.dto.FleurView;
 import com.fleurservice.exceptions.FleurNotFoundException;
 import com.fleurservice.model.Fleur;
 import com.fasterxml.jackson.annotation.JsonView;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@Tag(name = "Fleurs", description = "API de gestion de la boutique de fleurs")
 @RestController
 @RequestMapping("/fleurs")
 public class FleurController {
@@ -26,21 +29,22 @@ public class FleurController {
         this.fleurRepository = fleurRepository;
     }
 
+    @Operation(summary = "Récupérer toutes les fleurs")
     @GetMapping
-    @JsonView(FleurView.Public.class)
     public ResponseEntity<List<Fleur>> getAllFleurs() {
         List<Fleur> fleurs = fleurRepository.findAll();
         return ResponseEntity.ok(fleurs);
     }
 
+    @Operation(summary = "Récupérer une fleur par son ID")
     @GetMapping("/{id}")
-    @JsonView(FleurView.Public.class)
     public ResponseEntity<Fleur> getFleurById(@PathVariable Long id) {
         Fleur fleur = fleurRepository.findById(id)
                 .orElseThrow(() -> new FleurNotFoundException(id));
         return ResponseEntity.ok(fleur);
     }
 
+    @Operation(summary = "Créer une nouvelle fleur")
     @PostMapping
     public ResponseEntity<Fleur> createFleur(@Valid @RequestBody Fleur fleur) {
         Fleur savedFleur = fleurRepository.save(fleur);
@@ -55,6 +59,7 @@ public class FleurController {
     }
 
 
+    @Operation(summary = "Modifier une fleur existante")
     @PutMapping("/{id}")
     public ResponseEntity<Fleur> updateFleur(
             @PathVariable Long id,
@@ -73,6 +78,7 @@ public class FleurController {
         return ResponseEntity.ok(updatedFleur);
     }
 
+    @Operation(summary = "Supprimer une fleur")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFleur(@PathVariable Long id) {
         Fleur fleur = fleurRepository.findById(id)
@@ -82,8 +88,8 @@ public class FleurController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Rechercher les fleurs par couleur")
     @GetMapping("/couleur/{couleur}")
-    @JsonView(FleurView.Public.class)
     public ResponseEntity<List<Fleur>> getFleursByCouleur(@PathVariable String couleur) {
         List<Fleur> fleurs = fleurRepository.findByCouleurIgnoreCase(couleur);
 
@@ -93,8 +99,8 @@ public class FleurController {
         return ResponseEntity.ok(fleurs);
     }
 
+    @Operation(summary = "Rechercher les fleurs par prix maximum")
     @GetMapping("/prix/max/{maxPrix}")
-    @JsonView(FleurView.Public.class)
     public ResponseEntity<List<Fleur>> getFleursByMaxPrice(@PathVariable Double maxPrix) {
         List<Fleur> fleurs = fleurRepository.findByPrixLessThanEqual(maxPrix);
 
@@ -104,15 +110,15 @@ public class FleurController {
         return ResponseEntity.ok(fleurs);
     }
 
+    @Operation(summary = "Admin — voir toutes les fleurs avec fournisseur")
     @GetMapping("/admin")
-    @JsonView(FleurView.Internal.class)
     public ResponseEntity<List<Fleur>> getFleurAdmin() {
         List<Fleur> fleur = fleurRepository.findAll();
         return ResponseEntity.ok(fleur);
     }
 
+    @Operation(summary = "Admin — voir une fleur avec fournisseur")
     @GetMapping("/admin/{id}")
-    @JsonView(FleurView.Internal.class)
     public ResponseEntity<Fleur> getFleurAdmin(@PathVariable Long id) {
         Fleur fleur = fleurRepository.findById(id)
                 .orElseThrow(() -> new FleurNotFoundException(id));
