@@ -1,15 +1,13 @@
 package com.fleurservice.controller;
 
 import com.fleurservice.dao.FleurRepository;
-import com.fleurservice.dto.FleurView;
+import com.fleurservice.dto.FleurAdminDTO;
 import com.fleurservice.exceptions.FleurNotFoundException;
 import com.fleurservice.model.Fleur;
-import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -112,16 +110,19 @@ public class FleurController {
 
     @Operation(summary = "Admin — voir toutes les fleurs avec fournisseur")
     @GetMapping("/admin")
-    public ResponseEntity<List<Fleur>> getFleurAdmin() {
-        List<Fleur> fleur = fleurRepository.findAll();
+    public ResponseEntity<List<FleurAdminDTO>> getFleurAdmin() {
+        List<FleurAdminDTO> fleur = fleurRepository.findAll()
+                .stream()
+                .map(FleurAdminDTO::new)
+                .collect(java.util.stream.Collectors.toList());
         return ResponseEntity.ok(fleur);
     }
 
     @Operation(summary = "Admin — voir une fleur avec fournisseur")
     @GetMapping("/admin/{id}")
-    public ResponseEntity<Fleur> getFleurAdmin(@PathVariable Long id) {
+    public ResponseEntity<FleurAdminDTO> getFleurAdmin(@PathVariable Long id) {
         Fleur fleur = fleurRepository.findById(id)
                 .orElseThrow(() -> new FleurNotFoundException(id));
-        return ResponseEntity.ok(fleur);
+        return ResponseEntity.ok(new FleurAdminDTO(fleur));
     }
 }

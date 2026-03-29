@@ -1,7 +1,6 @@
 package com.fleurservice.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fleurservice.dto.FleurView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
@@ -37,6 +36,7 @@ public class Fleur {
     private String saisonnalite;
 
     // Visible seulement pour ADMIN
+    @JsonIgnore
     @Schema(description = "Fournisseur (admin uniquement)", example = "Fournisseur A")
     private String fournisseur;
 
